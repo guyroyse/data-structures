@@ -45,6 +45,39 @@ class LinkedList {
     this.lastNode = this.lastNode.previous
     this.lastNode.next = null
   }
+
+  getAt(index) {
+    if (index >= this.currentSize || index < 0) return null
+
+    let node = this.firstNode;
+    for (let i = 0; i < index; i++) {
+      node = node.next
+    }
+    return node
+  }
+
+  removeAt(index) {
+    let nodeToRemove = this.getAt(index)
+    if (nodeToRemove !== null) {
+
+      let prevNode = nodeToRemove.previous
+      let nextNode = nodeToRemove.next
+
+      if (prevNode !== null) {
+        prevNode.next = nextNode
+      } else {
+        this.firstNode = nextNode
+      }
+
+      if (nextNode !== null) {
+          nextNode.previous = prevNode
+      } else {
+          this.lastNode = prevNode
+      }
+
+      this.currentSize--
+    }
+  }
 }
 
 module.exports = LinkedList

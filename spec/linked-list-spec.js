@@ -132,6 +132,25 @@ describe("LinkedList", function() {
         subject.append("Orcs")
       })
 
+      describe("#getAt", function() {
+
+        it("gets an item", function() {
+          let node = subject.getAt(3)
+          expect(node.value).to.equal("Halflings")
+        })
+
+        it("gets null at the edge", function() {
+          let node = subject.getAt(5)
+          expect(node).to.be.null
+        })
+
+        it("gets null outside of range", function() {
+          let node = subject.getAt(6)
+          expect(node).to.be.null
+        })
+
+      })
+
       context("when we remove an item from the end", function() {
 
         beforeEach(function() {
@@ -172,6 +191,48 @@ describe("LinkedList", function() {
           expect(subject.first().previous).to.be.null
         })
 
+      })
+
+      context("when removing an item from the middle", function() {
+        beforeEach(function() {
+          subject.removeAt(2)
+        })
+
+        it("has a smaller size", function() {
+          expect(subject.size()).to.equal(4)
+        })
+
+        it("no longer has that item", function() {
+          expect(subject.first().next.next.value).to.not.equal("Gnomes")
+        })
+      })
+
+      context("when removing an item from the beginning", function() {
+        beforeEach(function() {
+          subject.removeAt(0)
+        })
+
+        it("has a smaller size", function() {
+          expect(subject.size()).to.equal(4)
+        })
+
+        it("no longer has that item", function() {
+          expect(subject.first().value).to.not.equal("Dwarves")
+        })
+      })
+
+      context("when removing an item from the end", function() {
+        beforeEach(function() {
+          subject.removeAt(4)
+        })
+
+        it("has a smaller size", function() {
+          expect(subject.size()).to.equal(4)
+        })
+
+        it("no longer has that item", function() {
+          expect(subject.last().value).to.not.equal("Orcs")
+        })
       })
     })
   })
