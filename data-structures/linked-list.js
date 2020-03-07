@@ -33,6 +33,18 @@ class LinkedList {
   last() {
     return this.lastNode
   }
+
+  removeFirst() {
+    this.currentSize--
+    this.firstNode = this.firstNode.next
+    this.firstNode.previous = null
+  }
+
+  removeLast() {
+    this.currentSize--
+    this.lastNode = this.lastNode.previous
+    this.lastNode.next = null
+  }
 }
 
 module.exports = LinkedList

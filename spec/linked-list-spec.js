@@ -73,6 +73,14 @@ describe("LinkedList", function() {
           expect(subject.first().next.value).to.equal("Bard")
         })
 
+        it("has the last value", function() {
+          expect(subject.last().value).to.equal("Bard")
+        })
+
+        it("has the second to last value", function() {
+          expect(subject.last().previous.value).to.equal("Barbarian")
+        })
+
         context("when a third item is added", function() {
 
           beforeEach(function() {
@@ -106,7 +114,64 @@ describe("LinkedList", function() {
           it("has the second to last value", function() {
             expect(subject.last().previous.value).to.equal("Bard")
           })
+
+          it("has the third to last value", function() {
+            expect(subject.last().previous.previous.value).to.equal("Barbarian")
+          })
         })
+      })
+    })
+
+    context("when we have a nicely populated list", function() {
+
+      beforeEach(function() {
+        subject.append("Dwarves")
+        subject.append("Elves")
+        subject.append("Gnomes")
+        subject.append("Halflings")
+        subject.append("Orcs")
+      })
+
+      context("when we remove an item from the end", function() {
+
+        beforeEach(function() {
+          subject.removeLast()
+        })
+
+        it("has a smaller size", function() {
+          expect(subject.size()).to.equal(4)
+        })
+
+        it("no longer has that item", function() {
+          expect(subject.last().value).to.not.equal("Orcs")
+        })
+
+        it("changes the last node", function() {
+          expect(subject.last().value).to.equal("Halflings")
+          expect(subject.last().next).to.be.null
+        })
+
+      })
+
+      context("when we remove an item from the begining", function() {
+
+        beforeEach(function() {
+          subject.removeFirst()
+        })
+
+        it("has a smaller size", function() {
+          expect(subject.size()).to.equal(4)
+        })
+
+        it("no longer has that item", function() {
+          expect(subject.first().value).to.not.equal("Dwarves")
+        })
+
+        it("changes the first node", function() {
+          expect(subject.first().value).to.equal("Elves")
+          expect(subject.first().previous).to.be.null
+        })
+
       })
     })
   })
