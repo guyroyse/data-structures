@@ -2,6 +2,7 @@ class LinkedList {
   constructor() {
     this.firstNode = null
     this.lastNode = null
+    this.currentSize = 0
   }
 
   isEmpty() {
@@ -9,7 +10,7 @@ class LinkedList {
   }
 
   size() {
-    return this.firstNode === null ? 0 : 1
+    return this.currentSize
   }
 
   append(item) {
@@ -20,10 +21,15 @@ class LinkedList {
         this.lastNode.next = node
     }
     this.lastNode = node
+    this.currentSize++
   }
 
   first() {
     return this.firstNode
+  }
+
+  last() {
+    return this.lastNode
   }
 }
 

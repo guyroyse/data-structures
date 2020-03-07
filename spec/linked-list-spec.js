@@ -39,44 +39,71 @@ describe("LinkedList", function() {
         expect(subject.size()).to.equal(1)
       })
 
-      it("first has a value", function() {
+      it("has a first value", function() {
         expect(subject.first().value).to.equal("Barbarian")
+      })
+
+      it("has a last value", function() {
+        expect(subject.last().value).to.equal("Barbarian")
       })
 
       it("next returns null", function() {
         expect(subject.first().next).to.be.null
       })
-    })
 
-    context("when three items are added to the list", function() {
+      context("when a second item is added", function() {
 
         beforeEach(function() {
-          subject.append("Barbarian")
           subject.append("Bard")
-          subject.append("Baker")
         })
-  
+
         it("it is not empty", function() {
           expect(subject.isEmpty()).to.be.false
         })
   
-        // it("has size 3", function() {
-        //   expect(subject.size()).to.equal(3)
-        // })
+        it("has size 2", function() {
+          expect(subject.size()).to.equal(2)
+        })
   
-        it("first has a value", function() {
+        it("has the first value", function() {
           expect(subject.first().value).to.equal("Barbarian")
         })
   
-        it("next has a value", function() {
+        it("has the second value", function() {
           expect(subject.first().next.value).to.equal("Bard")
         })
+
+        context("when a third item is added", function() {
+
+          beforeEach(function() {
+            subject.append("Baker")
+          })
   
-        it("next next has a value", function() {
-          expect(subject.first().next.next.value).to.equal("Baker")
+          it("it is not empty", function() {
+            expect(subject.isEmpty()).to.be.false
+          })
+    
+          it("has size 3", function() {
+            expect(subject.size()).to.equal(3)
+          })
+    
+          it("has the first value", function() {
+            expect(subject.first().value).to.equal("Barbarian")
+          })
+    
+          it("has the second value", function() {
+            expect(subject.first().next.value).to.equal("Bard")
+          })
+  
+          it("has the third value", function() {
+            expect(subject.first().next.next.value).to.equal("Baker")
+          })
+  
+          it("has the last value", function() {
+            expect(subject.last().value).to.equal("Baker")
+          })
         })
       })
-
+    })
   })
-
 })
