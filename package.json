@@ -6,7 +6,8 @@
     "test": "mocha spec/**/*-spec.js"
   },
   "contributors": [
-    "Guy Royse <guy@guyroyse.com>"
+    "Guy Royse <guy@guyroyse.com>",
+    "Brendan Enrick <benrick@live.com>"
   ],
   "private": true,
   "dependencies": {
