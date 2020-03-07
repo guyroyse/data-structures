@@ -102,6 +102,10 @@ describe("LinkedList", function() {
           it("has the last value", function() {
             expect(subject.last().value).to.equal("Baker")
           })
+
+          it("has the second to last value", function() {
+            expect(subject.last().previous.value).to.equal("Bard")
+          })
         })
       })
     })

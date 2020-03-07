@@ -16,9 +16,11 @@ class LinkedList {
   append(item) {
     let node = { value: item, next: null }
     if (this.firstNode === null) {
-        this.firstNode = node
+      this.firstNode = node
+      node.previous = null
     } else {
-        this.lastNode.next = node
+      this.lastNode.next = node
+      node.previous = this.lastNode
     }
     this.lastNode = node
     this.currentSize++
