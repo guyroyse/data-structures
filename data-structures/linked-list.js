@@ -70,9 +70,9 @@ class LinkedList {
       }
 
       if (nextNode !== null) {
-          nextNode.previous = prevNode
+        nextNode.previous = prevNode
       } else {
-          this.lastNode = prevNode
+        this.lastNode = prevNode
       }
 
       this.currentSize--
