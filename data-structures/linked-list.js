@@ -56,8 +56,7 @@ class LinkedList {
     return node
   }
 
-  removeAt(index) {
-    let nodeToRemove = this.getAt(index)
+  removeNode(nodeToRemove) {
     if (nodeToRemove !== null) {
 
       let prevNode = nodeToRemove.previous
@@ -77,6 +76,11 @@ class LinkedList {
 
       this.currentSize--
     }
+  }
+
+  removeAt(index) {
+    let nodeToRemove = this.getAt(index)
+    this.removeNode(nodeToRemove)
   }
 }
 

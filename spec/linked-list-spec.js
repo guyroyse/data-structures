@@ -234,6 +234,21 @@ describe("LinkedList", function() {
           expect(subject.last().value).to.not.equal("Orcs")
         })
       })
+
+      describe("#removeNode", function() {
+        beforeEach(function() {
+          let node = subject.getAt(2)
+          subject.removeNode(node)
+        })
+
+        it("has a smaller size", function() {
+          expect(subject.size()).to.equal(4)
+        })
+
+        it("no longer has that item", function() {
+          expect(subject.getAt(2).value).to.not.equal("Gnomes")
+        })
+      })
     })
   })
 })
