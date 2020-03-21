@@ -6,5 +6,5 @@
 
 Fortnightly on Saturdays, 1:00 PM EDT / 10:00 AM PDT (17:00 UTC).
 
-- **March 7**: Linked List
 - **March 21**: Hash Tables
+- **March 7**: [Linked List](https://www.twitch.tv/videos/563518710)
