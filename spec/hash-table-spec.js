@@ -10,7 +10,7 @@ describe("HashTable", function() {
   context("when created", function() {
 
     beforeEach(function() {
-      subject = new HashTable()
+      subject = new HashTable(16)
     })
 
     it("is empty", function() {
@@ -108,6 +108,31 @@ describe("HashTable", function() {
     
         it("has a size of 0", function() {
           expect(subject.size()).to.equal(0)
+        })
+      })
+    })
+
+    context("when a lot of things are added", function() {
+      beforeEach(function() {
+        for (let i = 0; i < 500; i++) {
+          subject.put(`key ${i}`, `value ${i * 10}`)
+        }
+      })
+
+      it("has a size of 500", function() {
+        expect(subject.size()).to.equal(500)
+      })
+
+      it("can retrive every value", function() {
+        for (let i = 0; i < 500; i++) {
+          expect(subject.fetch(`key ${i}`)).to.equal(`value ${i * 10}`)
+        }
+      })
+
+      // This test can *technically* fail, based on Math.
+      it("really uses all of the underlying lists", function() {
+        subject._data.forEach(list => {
+          expect(list.size()).to.be.greaterThan(0)
         })
       })
     })
