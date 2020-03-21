@@ -1,10 +1,9 @@
 const LinkedList = require('./linked-list')
 const murmur = require('murmurhash')
 
-const MURMUR_SEED = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
-
 class HashTable {
   constructor(capacity = 128) {
+    this._seed = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
     this._capacity = capacity
     this._data = new Array(this._capacity).fill().map(() => new LinkedList())
     this._size = 0
@@ -46,7 +45,7 @@ class HashTable {
   }
 
   findList(key) {
-    let index = murmur.v3(key, MURMUR_SEED) % this._capacity
+    let index = murmur.v3(key, this._seed) % this._capacity
     return this._data[index]
   }
 
