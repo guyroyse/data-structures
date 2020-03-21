@@ -1,8 +1,12 @@
-let LinkedList = require('./linked-list')
+const LinkedList = require('./linked-list')
+const murmur = require('murmurhash')
+
+const MURMUR_SEED = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
+const CAPACITY = 128
 
 class HashTable {
   constructor() {
-    this._data = new LinkedList()
+    this._data = new Array(CAPACITY).fill().map(() => new LinkedList())
     this._size = 0
   }
 
@@ -15,9 +19,13 @@ class HashTable {
   }
 
   put(key, value) {
-    let node = this.findNode(key)
+    let hash = murmur.v3(key, MURMUR_SEED)
+    let index = hash % CAPACITY
+    let list = this._data[index]
+
+    let node = this.findNodeInList(list, key)
     if (node === null) {
-      this._data.append({ key, value })
+      list.append({ key, value })
       this._size++
     } else {
       node.value.value = value
@@ -25,12 +33,16 @@ class HashTable {
   }
 
   fetch(key) {
-    let node = this.findNode(key)
+    let hash = murmur.v3(key, MURMUR_SEED)
+    let index = hash % CAPACITY
+    let list = this._data[index]
+
+    let node = this.findNodeInList(list, key)
     return node === null ? null : node.value.value
   }
 
-  findNode(key) {
-    let node = this._data.first()
+  findNodeInList(list, key) {
+    let node = list.first()
     while (node !== null) {
       if (node.value.key === key) return node
       node = node.next
@@ -39,8 +51,12 @@ class HashTable {
   }
 
   remove(key) {
-    let node = this.findNode(key)
-    this._data.removeNode(node)
+    let hash = murmur.v3(key, MURMUR_SEED)
+    let index = hash % CAPACITY
+    let list = this._data[index]
+
+    let node = this.findNodeInList(list, key)
+    list.removeNode(node)
     this._size--
   }
 }
