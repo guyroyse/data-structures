@@ -19,11 +19,9 @@ class HashTable {
   }
 
   put(key, value) {
-    let hash = murmur.v3(key, MURMUR_SEED)
-    let index = hash % CAPACITY
-    let list = this._data[index]
-
+    let list = this.findList(key)
     let node = this.findNodeInList(list, key)
+
     if (node === null) {
       list.append({ key, value })
       this._size++
@@ -33,12 +31,23 @@ class HashTable {
   }
 
   fetch(key) {
-    let hash = murmur.v3(key, MURMUR_SEED)
-    let index = hash % CAPACITY
-    let list = this._data[index]
-
+    let list = this.findList(key)
     let node = this.findNodeInList(list, key)
+
     return node === null ? null : node.value.value
+  }
+
+  remove(key) {
+    let list = this.findList(key)
+    let node = this.findNodeInList(list, key)
+
+    list.removeNode(node)
+    this._size--
+  }
+
+  findList(key) {
+    let index = murmur.v3(key, MURMUR_SEED) % CAPACITY
+    return this._data[index]
   }
 
   findNodeInList(list, key) {
@@ -48,16 +57,6 @@ class HashTable {
       node = node.next
     }
     return null
-  }
-
-  remove(key) {
-    let hash = murmur.v3(key, MURMUR_SEED)
-    let index = hash % CAPACITY
-    let list = this._data[index]
-
-    let node = this.findNodeInList(list, key)
-    list.removeNode(node)
-    this._size--
   }
 }
 
