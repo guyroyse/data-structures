@@ -42,6 +42,21 @@ describe("HashTable", function() {
         expect(subject.size()).to.equal(1)
       })
 
+      context("when we reuse a key", function() {
+
+        beforeEach(function() {
+          subject.put("Master", "Sword")
+        })
+  
+        it("still has a size of 1", function() {
+          expect(subject.size()).to.equal(1)
+        })
+
+        it("has the new value", function() {
+          expect(subject.fetch("Master")).to.equal("Sword")
+        })
+      })
+
       context("when another item is added to the hash", function() {
         beforeEach(function() {
           subject.put("Mario", "Mario")

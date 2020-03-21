@@ -15,8 +15,13 @@ class HashTable {
   }
 
   put(key, value) {
-    this._data.append({ key, value })
-    this._size++
+    let node = this.findNode(key)
+    if (node === null) {
+      this._data.append({ key, value })
+      this._size++
+    } else {
+      node.value.value = value
+    }
   }
 
   fetch(key) {
