@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "description": "Inefficient versions of data structures in JavaScript",
   "scripts": {
-    "test": "mocha spec/**/*-spec.js"
+    "test": "mocha"
+  },
+  "mocha": {
+    "spec": "spec/**/*-spec.js",
+    "ui": "bdd"
   },
   "contributors": [
     "Guy Royse <guy@guyroyse.com>",
